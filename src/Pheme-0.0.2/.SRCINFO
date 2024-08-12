@@ -1,0 +1,14 @@
+pkgbase = pheme
+	pkgdesc = A basic new reader in Rust. (WIP)
+	pkgver = 0.0.2
+	pkgrel = 1
+	url = https://github.com/LycaonIndustries/pheme
+	arch = any
+	license = MIT
+	makedepends = cargo
+	depends = gcc-libs
+	provides = pheme
+	options = !lto
+	source = https://github.com/LycaonIndustries/pheme/archive/refs/tags/v0.0.2.tar.gz
+
+pkgname = pheme
