@@ -1,6 +1,7 @@
 // Importing necessary modules and functions.
 mod args;
 mod utils;
+mod config;
 use clap::Parser;
 
 use apis::{get_articles, render_articles, Articles};

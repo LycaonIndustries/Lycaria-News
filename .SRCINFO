@@ -1,6 +1,6 @@
 pkgbase = pheme
 	pkgdesc = A basic new reader in Rust. (WIP)
-	pkgver = 0.0.2
+	pkgver = 0.1.0
 	pkgrel = 1
 	url = https://github.com/LycaonIndustries/pheme
 	arch = any

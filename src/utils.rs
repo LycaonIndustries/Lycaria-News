@@ -1,5 +1,5 @@
 use crate::args::Args;
-use dotenv::dotenv;
+use crate::config::load_api_key;
 use std::error::Error;
 use urlencoding::encode;
 
@@ -61,10 +61,7 @@ retrieving the key from the `NEWS_API_KEY` environment variable.
   or a `Box<dyn Error>` if the API key cannot be retrieved.
 */
 fn sign_api_key(url: &str) -> Result<String, Box<dyn Error>> {
-    dotenv().ok();
-
-    let news_api_key = std::env::var("NEWS_API_KEY")
-        .map_err(|_| "Environment variable NEWS_API_KEY must be set".to_string())?;
+    let news_api_key = load_api_key();
 
     Ok(format!("{}?apiKey={}", url, news_api_key))
 }
