@@ -6,34 +6,32 @@ pkgrel=1
 pkgdesc="A basic new reader in Rust. (WIP)"
 provides=("pheme")
 license=("MIT")
-
 packager="Rishabh Anand <rishabhanandxz@gmail.com>"
 maintainer="Rishabh Anand <rishabhanandxz@gmail.com>"
 
-md5sum=('SKIP')
-sha256sums=('5abd4c24b109471fd0b647cbd40c9336a14fcbc2909c486842912072c9910046')
+source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v${pkgver}.tar.gz")
+sha256sums=('537be7121db41557698ec8adb7a5a6e63907be171c97c4d8e548add622c5cdc8')
 
 arch=('any')
 depends=('gcc-libs')
 makedepends=('cargo')
-source=("$url/archive/refs/tags/v${pkgver}.tar.gz")
 options=(!lto)
-
-prepare() {
-    cargo update
-    cargo fetch --locked --target "$(rustc -vV | sed -n 's/host: //p')"
-}
 
 build() {
     cd "$pkgname-$pkgver"
-    cargo build --frozen --release --all-features
+    cargo build -q --frozen --release --all-features --locked
+}
+
+check() {
+  cd "$pkgname-$pkgver"
+
+  cargo test --release --locked --features 'pcre2'
 }
 
 package() {
-    cd "$pkgname-$pkgver"
-    ls
-    install -Dm755 "target/release/pheme" "$pkgdir/usr/bin/pheme"
+  cd "$pkgname-$pkgver"
 
-    install -Dm644 "README.md" "$pkgdir/usr/share/doc/${pkgname}/README.md"
-    install -Dm644 "LICENSE" "$pkgdir/usr/share/licenses/${pkgname}/LICENSE"
+  install -Dm755 "target/release/$pkgname" "$pkgdir/usr/bin/$pkhname"
+  install -Dm644 "README.md" "$pkgdir/usr/share/doc/${pkgname}/README.md"
+  install -Dm644 "LICENSE" "$pkgdir/usr/share/licenses/${pkgname}/LICENSE"
 }
