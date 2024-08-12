@@ -1,12 +1,11 @@
 // Importing necessary modules and functions.
-// `get_articles` and `Articles` are used to fetch and represent the articles from the API.
-// `dark_blue_ln`, `dark_magenta`, and `magenta` are used for colored terminal output.
-// `dotenv` is used to load environment variables from a `.env` file.
-// `Error` trait is used for error handling.
 use apis::{get_articles, Articles};
-use colour::{dark_blue_ln, dark_magenta};
+use colour::{dark_blue_ln, dark_magenta_bold};
 use dotenv::dotenv;
 use std::error::Error;
+
+const NEWS_BASE_ENDPOINT: &str = "https://newsapi.org/v2/top-headlines";
+const NEWS_DEFAULT_SOURCE: &str = "techcrunch";
 
 /// Renders the articles to the console with colored output.
 ///
@@ -18,8 +17,8 @@ use std::error::Error;
 /// * `articles` - An `Articles` struct containing the list of articles to render.
 pub fn render_articles(articles: Articles) {
     for i in &articles.articles {
-        // Print the article's title in dark magenta.
-        dark_magenta!("> {}\n", i.title);
+        // Print the article's title in dark magenta bold.
+        dark_magenta_bold!("->> {}\n", i.title);
 
         // Print the article's URL in dark blue, followed by two newlines for spacing.
         dark_blue_ln!("{}\n\n", i.url);
@@ -46,16 +45,16 @@ fn main() -> Result<(), Box<dyn Error>> {
     dotenv()?;
 
     // Retrieve the API key from the environment variable `NEWS_API_KEY`.
-    let news_api_key = std::env::var("NEWS_API_KEY")?;
+    let news_api_key = std::env::var("NEWS_API_KEY")
+        .map_err(|_| "Environment variable NEWS_API_KEY must be set")?;
 
-    // Base URL for fetching top headlines from the News API.
-    let url = "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=";
-
-    // Combine the base URL with the API key to create the full request URL.
-    let news_url = format!("{}{}", url, news_api_key);
+    let url = format!(
+        "{}?sources={}&apiKey={}",
+        NEWS_BASE_ENDPOINT, NEWS_DEFAULT_SOURCE, news_api_key
+    );
 
     // Fetch the articles from the News API.
-    let news: Articles = get_articles(&news_url)?;
+    let news: Articles = get_articles(&url)?;
 
     // Render the fetched articles to the console.
     render_articles(news);
