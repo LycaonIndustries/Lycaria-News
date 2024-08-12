@@ -1,12 +1,22 @@
-workspace = { members = ["apis"] }
 [package]
-name = "rust_basics"
+name = "pheme"
 version = "0.1.0"
+license="MIT"
+authors=["Fenris Lycaon"]
+description = "A basic new reader in Rust. (WIP)"
+repository = "https://github.com/LycaonIndustries/pheme"
 edition = "2021"
+readme = "README.md"
+keywords = ["rust", "news", "package", "test"]
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[package.metadata.arch]
+arch = ["x86_64"]
+makedepends = ["cargo"]
+provides = ["pheme"]
 
 [dependencies]
 apis = {path = "./apis"}
 colour = "2.1.0"
 dotenv = "0.15.0"
+
+workspace = { members = ["apis"] }
