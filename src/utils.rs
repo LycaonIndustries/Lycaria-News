@@ -1,5 +1,7 @@
+use crate::args::Args;
 use dotenv::dotenv;
 use std::error::Error;
+use urlencoding::encode;
 
 const NEWS_BASE_URL: &str = "https://newsapi.org/v2";
 
@@ -65,4 +67,53 @@ fn sign_api_key(url: &str) -> Result<String, Box<dyn Error>> {
         .map_err(|_| "Environment variable NEWS_API_KEY must be set".to_string())?;
 
     Ok(format!("{}?apiKey={}", url, news_api_key))
+}
+
+/**
+Builds the query parameter string for the News API request.
+
+This function takes the command-line arguments (`Args`) and constructs a URL-encoded 
+query parameter string based on the provided options.
+
+### Arguments:
+
+* `args` - A reference to the `Args` struct containing the command-line arguments.
+
+### Returns:
+
+* A `String` containing the formatted query parameters for the News API request. 
+*/
+pub fn build_params(args: &Args) -> String {
+    let mut params: String = "".to_string();
+
+    // Add optional parameters to the URL.
+    if let Some(q) = &args.q {
+        params.push_str(&format!("&q={}", encode(q)));
+    }
+    if let Some(search_in) = &args.search_in {
+        params.push_str(&format!("&searchIn={}", search_in));
+    }
+    if let Some(sources) = &args.sources {
+        params.push_str(&format!("&sources={}", sources));
+    }
+    if let Some(domains) = &args.domains {
+        params.push_str(&format!("&domains={}", domains));
+    }
+    if let Some(exclude_domains) = &args.exclude_domains {
+        params.push_str(&format!("&excludeDomains={}", exclude_domains));
+    }
+    if let Some(language) = &args.language {
+        params.push_str(&format!("&language={}", language));
+    }
+    if let Some(sort_by) = &args.sort_by {
+        params.push_str(&format!("&sortBy={}", sort_by));
+    }
+    if let Some(number) = &args.number {
+        params.push_str(&format!("&pageSize={}", number));
+    }
+    if let Some(page) = &args.page {
+        params.push_str(&format!("&page={}", page));
+    }
+
+    params
 }

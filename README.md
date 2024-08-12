@@ -1,20 +1,21 @@
 # Pheme
 
-This Rust-based command-line interface (CLI) application fetches and displays top headlines from a specified news source using the News API. The application leverages environment variables for secure API key management and provides a simple, colored output of the news articles in the terminal.
+A Rust-based command-line news aggregator that fetches and displays news articles from the News API.  
 
 ## Features
 
-- **Fetch News Headlines**: Retrieves top headlines from a configurable news source using the News API.
-- **Colored Output**: Displays article titles and URLs in distinct colors for enhanced readability.
-- **Environment Variable Management**: Utilizes the `dotenv` crate to load API keys securely from a `.env` file.
-- **Error Handling**: Implements robust error handling to manage API request failures, parsing issues, and missing environment variables.
+- **Customizable News Queries:** Fetch news based on keywords, sources, languages, and more using various command-line arguments.
+- **Colored Output:**  Displays news headlines and URLs with colored formatting for readability.
+- **Environment Variable Management:** Securely load your News API key from a `.env` file.
+- **Robust Error Handling:** Handles API request errors, parsing errors, and missing environment variables gracefully.
+- **Modular Codebase:** Organized into modules (`api`, `args`, `render`, `utils`) for maintainability.
 
 ## Installation
 
 ### Prerequisites
 
-- [Rust](https://www.rust-lang.org/tools/install) (Ensure you have the Rust toolchain installed)
-- A [News API key](https://newsapi.org/register) (You'll need to sign up to get a free API key)
+- **Rust:** Install the Rust toolchain from [https://www.rust-lang.org/tools/install](https://www.rust-lang.org/tools/install)
+- **News API Key:** Obtain a free API key from [https://newsapi.org/register](https://newsapi.org/register)
 
 ### Steps
 
@@ -47,19 +48,51 @@ This Rust-based command-line interface (CLI) application fetches and displays to
 
 ## Usage
 
-Upon running the application, it will fetch the latest top headlines from the configured news source (default is TechCrunch) and display them in the terminal with colored formatting:
+Run cargo run --release -- -h (or ./target/release/pheme -h after building) to see the available command-line options:
 
-- **Title**: Displayed in bold magenta
-- **URL**: Displayed in dark blue
+```md
+USAGE:
+    pheme [OPTIONS]
 
-### Example Output
+OPTIONS:
+   -d, --domains <domains>              Comma-separated string of domains to restrict the search to
+   -e, --exclude-domains <exclude-domains>
+                                       Comma-separated string of domains to remove from the
+                                       results
+   -l, --language <language>          The 2-letter ISO-639-1 code of the language you want
+                                       headlines for
+   -n, --number <number>              The number of results to return per page (max 100)
+   -p, --page <page>                    Use this to page through the results
+   -q, --q <q>                        Keywords or phrases to search for in the article title and
+                                       body
+   -s, --sources <sources>              Comma-separated string of identifiers for news sources or
+                                       blogs
+   --search-in <search-in>            The fields to restrict your q search to. Possible options:
+                                       title, description, content (comma-separated)
+   --sort-by <sort-by>                The order to sort the articles in. Possible options:
+                                       relevancy, popularity, publishedAt
+   -h, --help                        Print help information
+   -V, --version                     Print version information
+```
 
-```text
-->> Tech Giants Announce New Collaboration
-https://www.example.com/article1
+### Examples
 
-->> Breakthrough in AI Technology
-https://www.example.com/article2
+- Search for news about artificial intelligence:
+
+```bash
+cargo run --release -- -q "artificial intelligence"
+```
+
+- Get news from specific sources:
+
+```bash
+cargo run --release -- -s "bbc-news,the-verge"
+```
+
+- Filter by language and sort by relevance
+
+```bash
+cargo run --release -- -q "technology" --language en --sort-by relevancy
 ```
 
 ## Configuration
@@ -95,3 +128,4 @@ This project relies on the following crates:
 - `dotenv`: For loading environment variables.
 - `colour`: For colored terminal output.
 - `thiserror`: For defining custom error types.
+- `clap`: For parsing command-line arguments.
