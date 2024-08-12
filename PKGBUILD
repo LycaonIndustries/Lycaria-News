@@ -1,7 +1,7 @@
 # Maintainer: Rishabh Anand
 pkgname=pheme
 url="https://github.com/LycaonIndustries/pheme"
-pkgver=0.0.2
+pkgver=0.1.0
 pkgrel=1
 pkgdesc="A basic new reader in Rust. (WIP)"
 provides=("pheme")
