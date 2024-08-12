@@ -1,4 +1,4 @@
-# Lycaria News
+# Pheme
 
 This Rust-based command-line interface (CLI) application fetches and displays top headlines from a specified news source using the News API. The application leverages environment variables for secure API key management and provides a simple, colored output of the news articles in the terminal.
 
