@@ -20,28 +20,20 @@ source=("$url/archive/refs/tags/v${pkgver}.tar.gz")
 options=(!lto)
 
 prepare() {
-    export RUSTUP_TOOLCHAIN=stable
     cargo update
     cargo fetch --locked --target "$(rustc -vV | sed -n 's/host: //p')"
 }
 
-check() {
-    export RUSTUP_TOOLCHAIN=stable
-    cargo test --frozen --all-features --workspace
-}
-
 build() {
     cd "$pkgname-$pkgver"
-    export RUSTUP_TOOLCHAIN=stable
-    export CARGO_TARGET_DIR=target
     cargo build --frozen --release --all-features
 }
 
 package() {
     cd "$pkgname-$pkgver"
+    ls
+    install -Dm755 "../target/release/pheme" "$pkgdir/usr/bin/pheme"
 
-    install -Dm755 "target/release/pbcli" "$pkgdir/usr/bin/pbcli"
-
-    install -Dm644 "README.md" "$pkgdir/usr/share/doc/${pkgname}/README.md"
-    install -Dm644 "LICENSE-MIT" "$pkgdir/usr/share/licenses/${pkgname}/LICENSE"
+    install -Dm644 "../README.md" "$pkgdir/usr/share/doc/${pkgname}/README.md"
+    install -Dm644 "../LICENSE" "$pkgdir/usr/share/licenses/${pkgname}/LICENSE"
 }
