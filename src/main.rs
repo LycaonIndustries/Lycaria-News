@@ -7,14 +7,16 @@ use std::error::Error;
 const NEWS_BASE_ENDPOINT: &str = "https://newsapi.org/v2/top-headlines";
 const NEWS_DEFAULT_SOURCE: &str = "techcrunch";
 
-/// Renders the articles to the console with colored output.
-///
-/// This function takes an `Articles` struct and prints each article's title and URL to the console.
-/// The title is printed in dark magenta, and the URL is printed in dark blue.
-///
-/// # Arguments
-///
-/// * `articles` - An `Articles` struct containing the list of articles to render.
+/**
+Renders the articles to the console with colored output.
+
+This function takes an `Articles` struct and prints each article's title and URL to the console.
+The title is printed in dark magenta, and the URL is printed in dark blue.
+
+### Arguments
+
+* `articles` - An `Articles` struct containing the list of articles to render.
+*/
 pub fn render_articles(articles: Articles) {
     for i in &articles.articles {
         // Print the article's title in dark magenta bold.
@@ -25,21 +27,23 @@ pub fn render_articles(articles: Articles) {
     }
 }
 
-/// Main function to fetch and display top headlines from the News API.
-///
-/// This function loads the API key from environment variables, constructs the API URL,
-/// fetches the articles using the `get_articles` function, and then renders them using `render_articles`.
-///
-/// # Returns
-///
-/// * `Result<(), Box<dyn Error>>` - Returns `Ok(())` on success, or an error if any step fails.
-///
-/// # Errors
-///
-/// This function can return the following errors:
-/// * If the `.env` file cannot be loaded.
-/// * If the `NEWS_API_KEY` environment variable is not set.
-/// * If the request to the News API fails or if the articles cannot be fetched or parsed.
+/**
+Main function to fetch and display top headlines from the News API.
+
+This function loads the API key from environment variables, constructs the API URL,
+fetches the articles using the `get_articles` function, and then renders them using `render_articles`.
+
+### Returns
+
+* `Result<(), Box<dyn Error>>` - Returns `Ok(())` on success, or an error if any step fails.
+
+### Errors
+
+This function can return the following errors:
+* If the `.env` file cannot be loaded.
+* If the `NEWS_API_KEY` environment variable is not set.
+* If the request to the News API fails or if the articles cannot be fetched or parsed.
+*/
 fn main() -> Result<(), Box<dyn Error>> {
     // Load environment variables from a `.env` file.
     dotenv()?;
