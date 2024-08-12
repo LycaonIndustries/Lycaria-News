@@ -11,7 +11,7 @@ packager="Rishabh Anand <rishabhanandxz@gmail.com>"
 maintainer="Rishabh Anand <rishabhanandxz@gmail.com>"
 
 md5sum=('SKIP')
-sha256sum=('SKIP')
+sha256sums=('5abd4c24b109471fd0b647cbd40c9336a14fcbc2909c486842912072c9910046')
 
 arch=('any')
 depends=('gcc-libs')

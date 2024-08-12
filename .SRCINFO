@@ -10,5 +10,6 @@ pkgbase = pheme
 	provides = pheme
 	options = !lto
 	source = https://github.com/LycaonIndustries/pheme/archive/refs/tags/v0.0.2.tar.gz
+	sha256sums = 5abd4c24b109471fd0b647cbd40c9336a14fcbc2909c486842912072c9910046
 
 pkgname = pheme
