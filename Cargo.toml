@@ -4,7 +4,7 @@ workspace = { members = ["apis"] }
 name = "pheme"
 version = "0.0.1"
 license="MIT"
-authors=["Fenris Lycaon"]
+authors=["Rishabh Anand"]
 description = "A basic new reader in Rust"
 repository = "https://github.com/LycaonIndustries/pheme"
 edition = "2021"
@@ -13,5 +13,7 @@ keywords = ["rust", "news", "package", "test"]
 
 [dependencies]
 apis = {path = "./apis"}
+clap = { version = "4", features = ["derive"] }
 colour = "2.1.0"
 dotenv = "0.15.0"
+urlencoding = "2.1.3"
