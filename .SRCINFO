@@ -9,6 +9,6 @@ pkgbase = pheme
 	depends = gcc-libs
 	provides = pheme
 	options = !lto
-	source = https://github.com/LycaonIndustries/pheme/archive/refs/tags/v0.0.1.tar.gz
+	source = https://github.com/LycaonIndustries/pheme/archive/refs/tags/v0.0.2.tar.gz
 
 pkgname = pheme
