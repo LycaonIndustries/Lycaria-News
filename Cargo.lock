@@ -61,6 +61,7 @@ dependencies = [
 name = "apis"
 version = "0.1.0"
 dependencies = [
+ "colour",
  "serde",
  "serde_json",
  "thiserror",
@@ -258,7 +259,6 @@ version = "0.0.1"
 dependencies = [
  "apis",
  "clap",
- "colour",
  "dotenv",
  "urlencoding",
 ]

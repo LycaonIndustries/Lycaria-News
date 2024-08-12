@@ -14,6 +14,5 @@ keywords = ["rust", "news", "package", "test"]
 [dependencies]
 apis = {path = "./apis"}
 clap = { version = "4", features = ["derive"] }
-colour = "2.1.0"
 dotenv = "0.15.0"
 urlencoding = "2.1.3"

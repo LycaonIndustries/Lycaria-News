@@ -1,4 +1,6 @@
 use serde::Deserialize;
+use colour::{dark_blue_ln, dark_magenta_bold};
+
 
 /**
 Enum representing possible errors that can occur while interacting with the News API.
@@ -83,4 +85,24 @@ pub fn get_articles(url: &str) -> Result<Articles, NewsAPIError> {
 
     // Return the deserialized articles.
     Ok(articles)
+}
+
+/**
+Renders the articles to the console with colored output.
+
+This function takes an `Articles` struct and prints each article's title and URL to the console.
+The title is printed in dark magenta, and the URL is printed in dark blue.
+
+### Arguments
+
+* `articles` - An `Articles` struct containing the list of articles to render.
+*/
+pub fn render_articles(articles: Articles) {
+    for i in &articles.articles {
+        // Print the article's title in dark magenta bold.
+        dark_magenta_bold!("->> {}\n", i.title);
+
+        // Print the article's URL in dark blue, followed by two newlines for spacing.
+        dark_blue_ln!("{}\n\n", i.url);
+    }
 }
