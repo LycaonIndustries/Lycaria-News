@@ -129,3 +129,13 @@ This project relies on the following crates:
 - `colour`: For colored terminal output.
 - `thiserror`: For defining custom error types.
 - `clap`: For parsing command-line arguments.
+
+## Update
+
+- Merge changes
+- Update cargo.toml version
+- Update PKGBUILD version
+- Run `makepkg -g` to update sha256sums
+- Release
+- Test by `makepkg -si`
+- Update core repo
