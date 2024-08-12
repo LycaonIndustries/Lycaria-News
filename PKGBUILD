@@ -10,7 +10,7 @@ packager="Rishabh Anand <rishabhanandxz@gmail.com>"
 maintainer="Rishabh Anand <rishabhanandxz@gmail.com>"
 
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v${pkgver}.tar.gz")
-sha256sums=('537be7121db41557698ec8adb7a5a6e63907be171c97c4d8e548add622c5cdc8')
+sha256sums=('e92de6f88629aff0df9639ba71043072f5c8c07d388661b7a1f2d00f5f8d89b9')
 
 arch=('any')
 depends=('gcc-libs')
